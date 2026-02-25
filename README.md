@@ -7,7 +7,7 @@ Web-based multi tool peptide predictor
 First, make sure **uv** is installed: https://docs.astral.sh/uv/getting-started/installation/
 
 ```bash
-git clone https://github.com/karatedava/yolo_stamp.git
+git clone https://github.com/karatedava/PeptideScreener.git
 cd PeptideScreener
 uv sync 
 ```
