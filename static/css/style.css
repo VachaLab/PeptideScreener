@@ -1,0 +1,382 @@
+body {
+    font-family: 'Urbanist', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.container {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+h1, h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #09b1d7;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    color: #1c1c1c;
+}
+
+.form-group p {
+    font-size: 0.9rem;
+    color: #1c1c1c;
+    margin: 0.25rem 0;
+}
+
+select {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fafafa;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.slider-container {
+    margin: 1rem 0;
+}
+
+.section-divider {
+    border: 0;
+    height: 2px;
+    background: #ddd;
+    margin: 1.5rem 0;
+    background-image: linear-gradient(to right, transparent, #09b1d7, transparent);
+}
+
+.noUi-target {
+    border: 1px solid #ddd !important;
+    border-radius: 5px;
+    background: #fafafa !important;
+    box-shadow: none;
+    height: 10px;
+}
+
+.noUi-target .noUi-connect {
+    background: #09b1d7 !important;
+}
+
+.noUi-target .noUi-handle {
+    background: #f2ecf2 !important;
+    border: 1px solid #f2ecf2 !important;
+    border-radius: 10%;
+    width: 18px;
+    height: 18px;
+    top: -5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.noUi-target .noUi-handle:hover {
+    background: #1c1c1c !important;
+}
+
+.slider-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+output {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+}
+
+button, .download-link, .back-link, .button {
+    background-color: #09b1d7;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+
+button:hover, .download-link:hover, .back-link:hover, .button:hover {
+    background-color: #0c23d1;
+    transform: translateY(-2px);
+}
+
+.message {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.message.error {
+    color: #d32f2f;
+}
+
+.message.success {
+    color: #2e7d32;
+}
+
+.message.info {
+    color: #0288d1;
+}
+
+.logo-container {
+    display: flex;              /* ← core magic: puts children side by side */
+    align-items: center;        /* vertically centers both logos */
+    justify-content: center;    /* horizontally centers the whole pair — change to flex-start if you want left-aligned */
+    gap: 24px;                  /* space between logos — adjust 16–40px depending on taste */
+    flex-wrap: wrap;            /* allows stacking on very narrow screens */
+    padding: 16px 0;            /* optional breathing room top/bottom */
+}
+
+/* Make logos behave nicely */
+.logo-container img {
+    max-height: 160px;           /* ← most important: force similar visual height */
+    width: auto;                /* preserve aspect ratio */
+    display: block;             /* removes unwanted bottom gap */
+    object-fit: contain;        /* keeps whole logo visible even if proportions differ */
+}
+
+/* Responsive: stack on small screens if needed */
+@media (max-width: 500px) {
+    .logo-container {
+        flex-direction: column;     /* ← stack vertically */
+        gap: 16px;
+        align-items: center;
+    }
+    
+    .logo-container img {
+        max-height: 50px;           /* slightly smaller on mobile */
+    }
+}
+
+.intro {
+    font-size: 1rem;
+    color: #1c1c1c;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.theme-toggle {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.theme-toggle label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    color: #1c1c1c;
+}
+
+.result-details p {
+    font-size: 0.9rem;
+    color: #1c1c1c;
+    margin: 0.5rem 0;
+}
+
+.visualizations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.visualization img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.downloads p {
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+    }
+    select, button, .download-link, .back-link {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+    .logo-container img {
+        max-width: 80px;
+    }
+    .intro {
+        font-size: 0.9rem;
+    }
+    .noUi-target .noUi-handle {
+        width: 16px;
+        height: 16px;
+        top: -4px;
+    }
+}
+
+/* === DataFrame Table === */
+.table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 1rem 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.df-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    table-layout: auto;
+}
+
+.df-table thead {
+    background: #f1f5f9;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.df-table th,
+.df-table td {
+    padding: 12px 14px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.df-table th {
+    font-weight: 600;
+    color: #1e293b;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+.df-table td {
+    color: #334155;
+}
+
+.df-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.df-table tr:hover {
+    background-color: #eef2ff;
+    transition: background-color 0.12s;
+}
+
+.df-table .index-col {
+    background: #f1f5f9;
+    font-weight: 500;
+    color: #475569;
+    text-align: center;
+    width: 60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .df-table th,
+    .df-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+
+.model-info-box {
+    background: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    max-width: 720px;
+}
+
+.model-info-box h4 {
+    margin: 0 0 0.9rem 0;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.model-list {
+    margin: 0;
+    padding-left: 1.4rem;
+    list-style: none;
+}
+
+.model-list li {
+    margin-bottom: 0.55rem;
+    color: #4a5568;
+}
+
+.model-list strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+/* Optional: nicer bullet points */
+.model-list li::before {
+    content: "→";
+    margin-left: -1.4rem;
+    margin-right: 0.6rem;
+    color: #667eea;
+    font-weight: bold;
+}

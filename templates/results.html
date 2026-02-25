@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screening results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Urbanist:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1>Screening Results</h1>
+
+        {% if screening_df is not none and not screening_df.empty %}
+        <h2>Screening Table</h2>
+        <div style="max-height: 420px; overflow-y: auto; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
+            <table style="width: 100%; border-collapse: collapse; table-layout: auto;">
+                <thead style="position: sticky; top: 0; background: #fafafa; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <tr>
+                        <th class="index-col">#</th>
+                        {% for col in screening_df.columns %}
+                            <th style="padding: 10px; text-align: left; font-weight: 600;">{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idx, row in screening_df.iterrows() %}
+                        <tr style="border-bottom: 1px solid #f0f0f0;">
+                            <td class="index-col" style="padding: 9px 12px;">{{ idx }}</td>
+                            {% for val in row %}
+                                <td style="padding: 9px 12px;">{{ val }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="message info">No screening results available.</p>
+        {% endif %}
+
+        {% if visualizations %}
+        <h2>Visualizations</h2>
+        <div class="visualizations">
+            {% for file in visualization_files|default([]) %}
+            <div class="visualization">
+                {% set clean_path = output_dir | replace('static/', '') %}
+                <img src="{{ url_for('static', filename=clean_path ~ '/' ~ file) }}"
+                     alt="{{ file }}"
+                     style="max-width:100%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <h2>Download Data</h2>
+        <div class="downloads">
+            {% if results_file %}
+            <a href="{{ url_for('download_file', filename=output_dir/results_file) }}"
+               class="download-link">
+                <i class="fas fa-download"></i> Download CSV Results
+            </a>
+            {% endif %}
+
+        <a href="{{ url_for('main_page') }}" class="back-link">
+            <i class="fas fa-arrow-left"></i> Run Another Screening
+        </a>
+    </div>
+</div>
+
+</body>
