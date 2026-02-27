@@ -42,7 +42,7 @@ class CytotoxicityScreener(Screener):
             default='UKN'
         )
 
-        return df
+        return df.drop(columns=['toxicity_prob'])
     
     def preprocess_sequences(self, sequences) -> np.ndarray:
         """

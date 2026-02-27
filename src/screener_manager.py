@@ -77,18 +77,22 @@ class ScreenerManager():
 
         # ── Step 2: Cleaning function ───────────────────────────────────────────
         CLEAN_PATTERNS = {
-            "acetyl": re.compile(r"^\s*Ac[- ]?", flags=re.I),
-            "amid":   re.compile(r"[- ]*NH2\s*$", flags=re.I),
+            "acetyl": re.compile(r"^\s*(AC[- ]|ACE[- ]|ACETYL[- ])", flags=re.I),
+            "amid":   re.compile(r"[- ]*(NH2|NHE|AMID)\s*$", flags=re.I),
             "repeat": re.compile(r"\(([ACDEFGHIKLMNPQRSTVWY])\s*(\d+)\)", flags=re.I),
         }
+
 
         def clean_and_expand(seq: str) -> tuple[str, str | None]:
             """Return (cleaned_sequence, reason_if_failed)"""
             if not isinstance(seq, str) or not seq:
                 return "", "cleaning_failed_empty"
+            
+            seq = seq.strip().upper()
 
             orig = seq
 
+            # remove caps
             # Remove acetyl
             seq = CLEAN_PATTERNS["acetyl"].sub("", seq)
 
@@ -105,8 +109,6 @@ class ScreenerManager():
                 if count < 1 or count > 1000:  # safety limit
                     return orig, "invalid_repeat_count"
                 seq = seq[:match.start()] + (aa * count) + seq[match.end():]
-
-            seq = seq.strip().upper()
 
             if not seq:
                 return "", "cleaning_resulted_in_empty"

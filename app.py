@@ -22,9 +22,15 @@ def main_page():
     if request.method == 'POST':
 
         peptides_csv = request.files['PeptideCSV']
+        manual_sequences = request.form.get('manualSequences', '').strip()
         selected = request.form.getlist('screeners')
         custom_header_name = request.form.get('customHeader', 'sequence').strip()
 
+        if not peptides_csv and not manual_sequences:
+            print('OHNO')
+            flash("Please provide peptide sequences — either upload a CSV file or enter them manually.", "warning")
+            return render_template('main_page.html')
+        
         # Optional: treat empty or only-spaces as default
         if not custom_header_name:
             custom_header_name = 'sequence'
@@ -42,7 +48,17 @@ def main_page():
 
         sm = SM(screeners_dict, custom_header_name)
 
-        peptides_csv_df = pd.read_csv(peptides_csv)
+        if manual_sequences:
+            sequences = manual_sequences.split(',')
+            sequences = [s.strip() for s in sequences]
+            peptides_csv_df = pd.DataFrame(
+                {
+                    'sequence':sequences
+                }
+            )
+        else:
+            peptides_csv_df = pd.read_csv(peptides_csv)
+
         df_results, df_skipped = sm.run_complete_screening(peptides_csv_df)
         df_results.to_csv(output_folder / 'screening_results.csv', index=False)
 
