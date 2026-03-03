@@ -33,6 +33,11 @@ class ScreenerManager():
             device = get_best_device(DEVICE_OPTIONS)
             screener = SolubilityScreenerJana(model_path=solubility_jana_clf_path, device=device, seq_header=self.header)
         
+        ### TEMPLATE FOR ADDITION OF ANOTHER SCREENER ###
+        # if scr_key == 'custom_screener_name':
+        #     device = get_best_device(DEVICE_OPTIONS) [OPTIONAL]
+        #     screener = CustomScreener(model_path=path_to_model, device=device [OPTIONAL], seq_header=self.header)
+        
         return screener
 
     def curate_sequences(self, df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -82,7 +87,6 @@ class ScreenerManager():
             "repeat": re.compile(r"\(([ACDEFGHIKLMNPQRSTVWY])\s*(\d+)\)", flags=re.I),
         }
 
-
         def clean_and_expand(seq: str) -> tuple[str, str | None]:
             """Return (cleaned_sequence, reason_if_failed)"""
             if not isinstance(seq, str) or not seq:
@@ -92,12 +96,14 @@ class ScreenerManager():
 
             orig = seq
 
-            # remove caps
-            # Remove acetyl
-            seq = CLEAN_PATTERNS["acetyl"].sub("", seq)
+            # remove caps (keep the longest string)
+            seq = sorted(seq.split("-"), key=len)[-1]
 
-            # Remove amid
-            seq = CLEAN_PATTERNS["amid"].sub("", seq)
+            # # Remove acetyl
+            # seq = CLEAN_PATTERNS["acetyl"].sub("", seq)
+
+            # # Remove amid
+            # seq = CLEAN_PATTERNS["amid"].sub("", seq)
 
             # Remove internal dashes
             seq = seq.replace("-", "")
@@ -160,6 +166,9 @@ class ScreenerManager():
 
         print('\n CURATING SEQUENCES \n')
         df, skipped_df = self.curate_sequences(df)
+
+        if df.empty:
+            return df, skipped_df
 
         print('\n STARTING SCREENING \n')
         for screener in self.screener_list:

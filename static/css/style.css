@@ -388,3 +388,10 @@ button:hover, .download-link:hover, .back-link:hover, .button:hover {
     color: #667eea;
     font-weight: bold;
 }
+
+#manualSequences {
+    font-size: 1.1rem;   /* ≈18px – feels noticeably bigger */
+    /* Optional improvements */
+    line-height: 1.5;      /* better readability */
+    padding: 0.5rem 0.75rem;  /* a bit more comfortable spacing */
+}

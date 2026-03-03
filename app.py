@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, session
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from src.screener_manager import ScreenerManager as SM
 from src.utils import get_next_run_id
 import pandas as pd
@@ -27,11 +27,9 @@ def main_page():
         custom_header_name = request.form.get('customHeader', 'sequence').strip()
 
         if not peptides_csv and not manual_sequences:
-            print('OHNO')
             flash("Please provide peptide sequences — either upload a CSV file or enter them manually.", "warning")
             return render_template('main_page.html')
         
-        # Optional: treat empty or only-spaces as default
         if not custom_header_name:
             custom_header_name = 'sequence'
 
@@ -70,7 +68,6 @@ def main_page():
             'results_file': 'screening_results.csv'
         }
 
-        # Only add skipped_file key when the file exists / was written
         if not df_skipped.empty:
             df_skipped.to_csv(output_folder / 'skipped.csv', index=False)
             context['skipped_file'] = 'skipped.csv'
