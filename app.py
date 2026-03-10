@@ -122,7 +122,7 @@ def screener_design():
         peptide_screener.design_screener(train_df, val_df, output_folder)
 
         visualizations = ['train.png','validation.png']
-        if feature_generator == 'PCHEM' or feature_generator == 'CF':
+        if feature_generator == 'PCHEM' or feature_generator == 'CUSTOM_FEATURES':
             visualizations.append('feature_importance.png')
 
 
