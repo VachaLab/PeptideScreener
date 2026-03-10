@@ -3,7 +3,9 @@ SCREENER BASED ON CYTOTOXICITY CLASSIFICATION
 """
 
 from src.screeners.screener import Screener
-from src.screeners.toxicity.embedder import Embedder
+# from src.screeners.toxicity.embedder import Embedder
+
+from src.feature_generators.PLM.esm2 import EmbedderESM2 as Embedder
 import numpy as np
 import pandas as pd
 
@@ -12,7 +14,7 @@ import joblib
 
 class CytotoxicityScreener(Screener):
 
-    def __init__(self, model_path:Path, device='cpu', seq_header:str='sequence'):
+    def __init__(self, model_path:Path, device=None, seq_header:str='sequence'):
 
         super().__init__(device, seq_header)
 
@@ -27,7 +29,7 @@ class CytotoxicityScreener(Screener):
         run cytotoxicity filtering
         RETURN: pandas datafarme with added columns 'toxicity_prob', 'toxicity_cat and embedded sequences'
         """
-        sequences = self.preprocess_sequences(list(df[self.header].to_numpy()))
+        sequences = self.preprocess_sequences(list(df[self.seq_header].to_numpy()))
         probabilities = np.array(self.model.predict_proba(sequences)[:,1], dtype=np.float32)
 
         df['toxicity_prob'] = probabilities

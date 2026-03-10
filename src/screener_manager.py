@@ -25,17 +25,14 @@ class ScreenerManager():
         """
 
         if scr_key == 'toxicity':
-            device = get_best_device(DEVICE_OPTIONS)
-            screener = CytotoxicityScreener(model_path=toxicity_clf_path, device=device, seq_header=self.header)
+            screener = CytotoxicityScreener(model_path=toxicity_clf_path, seq_header=self.header)
         if scr_key == 'solubility_will':
             screener = SolubilityScreenerWill(model_path=solubility_will_clf_path, seq_header=self.header)
         if scr_key == 'solubility_jana':
-            device = get_best_device(DEVICE_OPTIONS)
-            screener = SolubilityScreenerJana(model_path=solubility_jana_clf_path, device=device, seq_header=self.header)
+            screener = SolubilityScreenerJana(model_path=solubility_jana_clf_path, seq_header=self.header)
         
         ### TEMPLATE FOR ADDITION OF ANOTHER SCREENER ###
         # if scr_key == 'custom_screener_name':
-        #     device = get_best_device(DEVICE_OPTIONS) [OPTIONAL]
         #     screener = CustomScreener(model_path=path_to_model, device=device [OPTIONAL], seq_header=self.header)
         
         return screener

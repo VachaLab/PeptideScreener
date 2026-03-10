@@ -122,3 +122,12 @@ Make sure:
 ##  OPTIONAL Step 6 – Add documentation to your tool
 
 Open `templates/documentation.html` and use the commented `<div>` block to add section for your tool !
+
+## ADDITIONAL INFORMATION
+if your tools needs <strong>python package<strong> which is not included, try to install that package via:
+
+```bash
+uv add package
+```
+
+if there is problem with package installation, <strong>contact us<strong> for the help with tool implementation

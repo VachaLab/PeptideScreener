@@ -44,7 +44,7 @@
         {% if visualizations %}
         <h2>Visualizations</h2>
         <div class="visualizations">
-            {% for file in visualization_files|default([]) %}
+            {% for file in visualizations|default([]) %}
             <div class="visualization">
                 {% set clean_path = output_dir | replace('static/', '') %}
                 <img src="{{ url_for('static', filename=clean_path ~ '/' ~ file) }}"
@@ -57,7 +57,22 @@
 
         <hr class="section-divider">
 
+        <h2>Downloads</h2>
+
         <div class="downloads">
+            {% if download_files %}
+                {% for file in download_files %}
+                <a href="{{ url_for('download_file', filename=output_dir ~ '/' ~ file) }}"
+                class="download-link">
+                    <i class="fas fa-download"></i> {{ file }}
+                </a>
+                {% endfor %}
+            {% else %}
+                <p>No files available for download.</p>
+            {% endif %}
+        </div>
+
+        <!-- <div class="downloads">
             {% if results_file %}
             <a href="{{ url_for('download_file', filename=output_dir/results_file) }}"
                class="download-link">
@@ -73,12 +88,12 @@
             </a>
             {% endif %}
         
-        </div>
+        </div> -->
 
         <hr class="section-divider">
 
         <a href="{{ url_for('main_page') }}" class="back-link">
-            <i class="fas fa-arrow-left"></i> Run Another Screening
+            <i class="fas fa-arrow-left"></i> Main Page
         </a>
 </div>
 

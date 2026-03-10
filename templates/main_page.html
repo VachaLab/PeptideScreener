@@ -109,9 +109,6 @@
 
                 <!-- SCREENINIG OPTION SECTION -->
                 <h2 class="mb-3">SELECT SCREENING OPTIONS</h2>
-                <p class="text-muted mb-3">
-                    Select the screening options you want to apply:
-                </p>
 
                 <div class="option-grid">
                     <!-- Toxicity Section -->
@@ -160,16 +157,22 @@
                     </div> -->
                     
                 </div>
+            
+            <br>
+            
+            <!--submit button -->
+            <div class="text-center mt-4">
+                <button type="submit" id="submit-btn" class="btn btn-primary btn-lg px-5">
+                    Start Screening
+                </button>
+            </div>
         </div>
 
-        <br>
+        <hr class="section-divider">
 
-        <!--submit button -->
-        <div class="text-center mt-4">
-            <button type="submit" id="submit-btn" class="btn btn-primary btn-lg px-5">
-                Start Screening
-            </button>
-        </div>
+        <a href="{{ url_for('screener_design') }}" class="button">
+            <i class="fas fa-arrow-left"></i> Design Screener
+        </a>
 
     </form>
 

@@ -49,6 +49,45 @@
 
         <hr class="section-divider">
 
+        <div class="card">
+            <h2>SCREENER DESIGN</h2>
+
+            <p class="text-muted mb-4">
+            Currently shows how well peptides can be classified with different feature sets.<br>
+            <strong>Soon:</strong> use designed screener directly in Screening page + download script to run screener locally.
+            </p>
+
+            <hr>
+
+            <h3 class="mt-4 mb-2">Feature generation options</h3>
+            <div class="list-group">
+            <div class="list-group-item">
+                <strong>ESM2, PBERT</strong><br>
+                <small>Protein language model embeddings</small>
+            </div>
+            <div class="list-group-item">
+                <strong>PCHEM</strong><br>
+                <small>Classic physicochemical descriptors, output will include feature importance</small>
+            </div>
+            <div class="list-group-item">
+                <strong>CUSTOM_FEATURES</strong><br>
+                <small>Use your own pre-computed features from CSV, output will include feature importance. (Features have to be included in uploaded train an validation CSV files !)</small>
+            </div>
+            </div>
+
+            <hr>
+
+            <h3 class="mt-4 mb-2 text-danger">Current constraints / issues</h3>
+            <ul class="mb-4">
+            <li>Labels must be binary: <code>0</code> / <code>1</code></li>
+            <li>Only <strong>Random Forest</strong> classifier is available for now</li>
+            <li>PLM approaches <strong>Overfit on training dataset</strong></li>
+            </ul>
+
+        </div>
+
+        <hr class="section-divider">
+
         <a href="{{ url_for('main_page') }}" class="back-link">
             <i class="fas fa-arrow-left"></i> Main Page
         </a>

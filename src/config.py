@@ -12,3 +12,4 @@ solubility_jana_clf_path = Path('src/screeners/solubility/janas_model.pkl')
 DEVICE_OPTIONS = ['cpu','cuda','mps']
 FOLDER_SIGNATURE = 'screening_run_XX'
 OUTPUT_DIR = Path('static/runs')
+EMBEDDER_OPTIONS = {'ESM2':'PLM', 'PBERT':'PLM', 'PCHEM':'PCHEM', 'CUSTOM_FEATURES':'CF'}

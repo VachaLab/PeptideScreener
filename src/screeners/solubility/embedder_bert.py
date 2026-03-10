@@ -53,7 +53,7 @@ class EmbedderBert():
                 truncation=True,
                 max_length=maxlen,
                 return_tensors='pt',
-            )
+            ).to(self.device)
             
             # Move to device
             inputs = {k: v.to(self.device) for k, v in inputs.items()}

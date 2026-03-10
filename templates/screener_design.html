@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screener Design - PeptideScreener V{{ app_version }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Urbanist:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert" style="border-left: 6px solid #dc3545; padding: 1.25rem;">
+            <strong>
+            {% if category == 'danger' %}Error{% elif category == 'warning' %}Warning{% else %}Notice{% endif %}:
+            </strong>
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h1 class="intro-title">Screener Designer</h1>
+    
+    <div class="intro-subtitle">
+        Design custom screening tool using either simple physiochemical features or embeddings from protein language models.
+        Details on <strong> OPTIONS and CONSTRAINSTS </strong> are described at he bottom of the <strong><a href="{{ url_for('documentation') }}">Documentation</a></strong> page.
+    </div>
+
+    <form id="screener_design_form" method="POST" action="{{ url_for('screener_design') }}" enctype="multipart/form-data">
+
+        <div id="loading-overlay">
+            <div class="loading-content">
+                <div class="spinner"></div>
+
+                <div class="loading-text"> Screener design in progress </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+ 
+            <div class="card">
+                <h2>INPUT TRAINING AND VALIDATION DATA</h2>
+                <p class="text-muted mb-3">
+                    Upload a CSV file containing protein <strong>sequences and labels</strong>
+                </p>
+
+                <div class="mb-4">
+                    <label for="train_csv" class="form-label">Training CSV</label>
+                    <input 
+                    type="file"
+                    class="custom-file-input" 
+                    id="TrainCSV" 
+                    name="TrainCSV"
+                    accept=".csv"
+                    >
+                </div>
+                <div class="mb-4">
+                    <label for="validation_csv" class="form-label">Validation CSV</label>
+                    <input 
+                    type="file"
+                    class="custom-file-input" 
+                    id="ValidationCSV" 
+                    name="ValidationCSV"
+                    accept=".csv"
+                    >
+                </div>
+
+                <br>
+
+                <div class="mb-3">
+                    <label for="custom_seq_header" class="form-label small">
+                        Custom sequence column name (default: 'sequence') 
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        id="custom_seq_header" 
+                        name="custom_seq_header" 
+                        maxlength="50"
+                    >
+                    <br>
+                    <label for="custom_label_header" class="form-label small">
+                        Custom label column name (default: 'label') 
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control form-control-sm" 
+                        id="custom_label_header" 
+                        name="custom_label_header" 
+                        maxlength="50"
+                    >
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="feature_generator">Feature type selection</label>
+                    <select name="feature_generator" id="feature_generator" required>
+                        {% for option in feature_generators %}
+                            <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+        <!--submit button -->
+        <div class="text-center mt-4">
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-lg px-5">
+                Build Screener
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+<hr class="section-divider">
+
+<a href="{{ url_for('main_page') }}" class="back-link">
+    <i class="fas fa-arrow-left"></i> Main Page
+</a>
+
+<script>
+    document.getElementById('screener_design_form').onsubmit = function() {
+      // Show overlay
+    var overlay = document.getElementById('loading-overlay');
+    if (overlay) {
+        overlay.classList.add('show');
+    }
+      
+    // disable button
+    document.getElementById('submit-btn').disabled = true;
+      
+    
+    };
+</script>
+
+</body>
+</html>

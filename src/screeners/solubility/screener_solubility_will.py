@@ -83,7 +83,7 @@ class SolubilityScreenerWill(Screener):
         - direct pipeline access
         - single dtype conversion at the end
         """
-        sequences = df[self.header].tolist()
+        sequences = df[self.seq_header].tolist()
 
         # Stage 1: clean (parallelize this in production with multiprocessing / joblib.Parallel)
         cleaned_seqs = [self.clean_sequence(seq) for seq in sequences]
